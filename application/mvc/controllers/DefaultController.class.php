@@ -6,6 +6,7 @@ class DefaultController extends BaseController
 {
     public function __construct(){
         parent::__construct();
+        $this->view->customTitle = 'TrxnMVC Mainpage';
     }
 
     public function indexAction(){

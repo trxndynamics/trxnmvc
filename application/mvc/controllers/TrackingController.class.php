@@ -9,6 +9,8 @@ class TrackingController extends BaseController
 
         if(Session::get('isWebsiteAdministrator') !== true)
             header('Location: '.urlpath.'');
+
+        $this->view->customTitle = 'TrxnMVC Tracking';
     }
 
     public function indexAction(){

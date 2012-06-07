@@ -5,6 +5,7 @@ namespace trxnMVC;
 class BaseView
 {
     public $params;
+    public $customTitle;
 
     public function __construct(){
         $this->params = array();

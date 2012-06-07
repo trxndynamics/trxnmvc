@@ -7,6 +7,7 @@ class LoginController extends BaseController
     public function __construct(){
         parent::__construct();
         parent::loadModel('Login');
+        $this->view->customTitle = 'TrxnMVC Login';
     }
 
     public function indexAction(){
