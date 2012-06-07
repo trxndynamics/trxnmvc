@@ -5,6 +5,6 @@ if(\trxnMVC\Session::get('loggedIn') == true){ ?>
 <a href='<?php echo urlpath;?>/logout'>Logout</a>
 <?php
 } else { ?>
-<a href='<?php echo urlpath;?>/login'>Login</a>
+<a href='<?php echo urlpath;?>/login'>Login</a>/<a href='<?php echo urlpath;?>/register'>Register</a>
 <?php
 } ?>

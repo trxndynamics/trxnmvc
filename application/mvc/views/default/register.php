@@ -9,5 +9,6 @@ if(isset($this->params['success']) && ($this->params['success']==false)){ ?>
 <form action="<?php echo urlpath; ?>/register" method="post">
     <label>Username</label><input type="text" name="username"/><br />
     <label>Password</label><input type="password" name="password"/><br />
+    <label>Password Confirm</label><input type="password" name="passwordConfirm"/><br />
     <label></label><input type="submit" />
 </form>

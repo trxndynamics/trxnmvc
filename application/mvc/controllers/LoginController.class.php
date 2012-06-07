@@ -14,7 +14,11 @@ class LoginController extends BaseController
     }
 
     public function registerAction(){
-        if((isset($_POST['username'])) && (isset($_POST['password']))){
+        if((isset($_POST['username'])) &&
+            (isset($_POST['password'])) &&
+            (isset($_POST['passwordConfirm'])) &&
+            ($_POST['password']==$_POST['passwordConfirm']))
+        {
             $registerSuccess = $this->model->register($_POST['username'], $_POST['password']);
 
             if($registerSuccess === true){
@@ -47,7 +51,7 @@ class LoginController extends BaseController
         $this->model->logout();
 
         //display mainpage
-        header('Location: http://traction.traction.localhost/');
+        header('Location: '.urlpath.'');
         exit();
     }
 }
