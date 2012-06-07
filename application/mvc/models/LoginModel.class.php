@@ -31,7 +31,7 @@ class LoginModel extends BaseModel
             $customSalt         = "BBcUG1hlngKLAC%!%avmvk";
             $passwordHash = \PasswordChecker::createPasswordHash($customSalt.$password);
 
-            $users = $this->db->selectCollection('users');
+            $users = $this->db->selectCollection(mongoDBDatabaseName . '_users');
             $insertionArray = array('username'=>$username,
                                     'password'=>$passwordHash);
 
@@ -52,7 +52,7 @@ class LoginModel extends BaseModel
     public function login($username, $password){
         require_once(__DIR__.'/../../libs/PasswordChecker.class.php');
 
-        $usersCollection    = $this->db->selectCollection('users');
+        $usersCollection    = $this->db->selectCollection(mongoDBDatabaseName.'_users');
 
         $customSalt         = "BBcUG1hlngKLAC%!%avmvk";
         $result = $usersCollection->findOne(array('username'=>$username, 'password'=>\PasswordChecker::createPasswordHash($customSalt.$password)));

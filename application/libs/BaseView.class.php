@@ -24,8 +24,12 @@ class BaseView
     }
 
     public function render($name, $styling='default'){
-        require_once(__DIR__.'/../mvc/views/layout/headers/'.$styling.'.php');
-        require_once(__DIR__.'/../mvc/views/'.$name.'.php');
-        require_once(__DIR__.'/../mvc/views/layout/footers/'.$styling.'.php');
+        if($styling === null){
+            require_once(__DIR__.'/../mvc/views/'.$name.'.php');
+        } else {
+            require_once(__DIR__.'/../mvc/views/layout/headers/'.$styling.'.php');
+            require_once(__DIR__.'/../mvc/views/'.$name.'.php');
+            require_once(__DIR__.'/../mvc/views/layout/footers/'.$styling.'.php');
+        }
     }
 }

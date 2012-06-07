@@ -4,6 +4,34 @@ namespace trxnMVC;
 
 class Bootstrap
 {
+    private function storePageAccessData($controllerName, $viewName=''){
+        try {
+            require_once(__DIR__.'/MongoDB.database.class.php');
+            $mongodb    = new \Mongo();
+            $db         = $mongodb->selectDB(mongoDBDatabaseName);
+            $collection = $db->selectCollection(mongoDBDatabaseName . '_pageviews');
+
+            /*
+             * verify page exists
+            * COULD BE HANDLED BETTER, NO NEED FOR SUBSEQUENT CHECKS IF ALREADY IN DB, ONLY ON TIME OF INITIAL CREATION
+            */
+
+            $searchCriteria = array('controllerName'=>strtolower($controllerName), 'viewName'=>strtolower($viewName));
+
+            if($collection->findOne($searchCriteria) != null){
+                $updateData     = array('$inc'=>array('views'=>1));
+                $collection->update($searchCriteria, $updateData);
+            } else {
+                $insertData             = $searchCriteria;
+                $insertData['views']    = 1;
+                $collection->insert($insertData);
+            }
+        } catch(\MongoConnectionException $mce){
+            //service unavailable, redirect to index page
+            header('Location: index');
+        }
+    }
+
     public function __construct(){
         if(isset($_GET['url'])){
             $url = rtrim($_GET['url'],'/');
@@ -31,7 +59,14 @@ class Bootstrap
             $controller             = new $controllerToRequest();
 
             if(method_exists($controller, $viewName.'Action')){
+                $this->storePageAccessData($controllerName, $viewName);
                 $controller->{$viewName.'Action'}();
+            } else {
+                //method not found
+                require_once(__DIR__.'/../mvc/controllers/DefaultController.class.php');
+                $this->storePageAccessData('Default', 'index');
+                $controller = new DefaultController();
+                $controller->indexAction();
             }
         } else {
             $handled = $this->handleNavAlias($controllerName, $viewName);
@@ -40,6 +75,7 @@ class Bootstrap
                 require_once(__DIR__.'/../mvc/controllers/DefaultController.class.php');
                 $controllerToRequest    = __NAMESPACE__ . '\\' . 'DefaultController';
                 $controller             = new $controllerToRequest();
+                $this->storePageAccessData('Default', 'pageNotFound');
                 $controller->pageNotFoundAction();
             }
         }
@@ -53,6 +89,7 @@ class Bootstrap
                 require_once(__DIR__.'/../mvc/controllers/LoginController.class.php');
                 $controllerToRequest    = __NAMESPACE__ . '\\' . 'LoginController';
                 $controller             = new $controllerToRequest();
+                $this->storePageAccessData('Login', 'register');
                 $controller->registerAction();
                 $handled = true;
                 break;
@@ -60,7 +97,7 @@ class Bootstrap
                 require_once(__DIR__.'/../mvc/controllers/LoginController.class.php');
                 $controllerToRequest    = __NAMESPACE__ . '\\' . 'LoginController';
                 $controller             = new $controllerToRequest();
-                $controller->logoutAction();
+                $this->storePageAccessData('Login', 'logout');
                 $handled = true;
                 break;
         }
