@@ -30,6 +30,7 @@ class LoginController extends BaseController
             }
         } else {
             //not attempted, displaying form
+            $this->view->params['selectedTab'] = 'register';
             $this->view->render('default/register');
         }
     }
@@ -44,6 +45,7 @@ class LoginController extends BaseController
         }
 
         //display dashboard
+        $this->view->params['selectedTab'] = 'login';
         $this->view->render('default/login');
     }
 

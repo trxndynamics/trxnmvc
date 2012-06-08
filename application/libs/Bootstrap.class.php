@@ -85,6 +85,14 @@ class Bootstrap
         $handled = false;
 
         switch($controllerName){
+            case 'index':
+            case 'Index':
+                require_once(__DIR__.'/../mvc/controllers/DefaultController.class.php');
+                $this->storePageAccessData('Default', 'index');
+                $controller = new DefaultController();
+                $controller->indexAction();
+                $handled = true;
+                break;
             case 'Register':
                 require_once(__DIR__.'/../mvc/controllers/LoginController.class.php');
                 $controllerToRequest    = __NAMESPACE__ . '\\' . 'LoginController';
