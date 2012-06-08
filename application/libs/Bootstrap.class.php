@@ -101,10 +101,12 @@ class Bootstrap
                 $controller->registerAction();
                 $handled = true;
                 break;
+            case 'logout':
             case 'Logout':
                 require_once(__DIR__.'/../mvc/controllers/LoginController.class.php');
                 $controllerToRequest    = __NAMESPACE__ . '\\' . 'LoginController';
                 $controller             = new $controllerToRequest();
+                $controller->logoutAction();
                 $this->storePageAccessData('Login', 'logout');
                 $handled = true;
                 break;

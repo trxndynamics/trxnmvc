@@ -22,5 +22,6 @@
         <div id="logoSubText">A sample MVC MongoDB Framework: The Dashboard Area</div>
     </div>
 </div>
-<?php require_once(__DIR__.'/../topNav/default.php'); ?>
+<?php require_once(__DIR__.'/../topNav/dashboard.php'); ?>
+<div class="spacer"></div>
 <div id="content">

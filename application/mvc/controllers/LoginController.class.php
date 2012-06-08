@@ -20,16 +20,42 @@ class LoginController extends BaseController
             (isset($_POST['passwordConfirm'])) &&
             ($_POST['password']==$_POST['passwordConfirm']))
         {
+            if((captchaEnabled == true) &&
+                (isset($_POST['recaptcha_challenge_field'])) &&
+                (isset($_POST['recaptcha_response_field'])))
+            {
+                require_once(__DIR__.'/../../libs/CaptchaHandler.class.php');
+                $captchaSuccess = CaptchaHandler::verifyCaptcha($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);
+
+                if($captchaSuccess !== true){
+                    $this->view->params['captchaEnabled']   = captchaEnabled;
+                    $this->view->params['captchaPublicKey'] = captchaPublicKey;
+                    $this->view->params['selectedTab']  = 'register';
+                    $this->view->params['success']      = false;
+                    $this->view->render('default/register');
+                }
+            }
+
             $registerSuccess = $this->model->register($_POST['username'], $_POST['password']);
 
             if($registerSuccess === true){
                 header('Location: ../dashboard/index');
             } else {
-                $this->view->params['success'] = false;
+                if(captchaEnabled == true){
+                    $this->view->params['captchaEnabled']   = captchaEnabled;
+                    $this->view->params['captchaPublicKey'] = captchaPublicKey;
+                }
+                $this->view->params['selectedTab']  = 'register';
+                $this->view->params['success']      = false;
                 $this->view->render('default/register');
             }
         } else {
             //not attempted, displaying form
+            if(captchaEnabled == true){
+                $this->view->params['captchaEnabled']   = captchaEnabled;
+                $this->view->params['captchaPublicKey'] = captchaPublicKey;
+            }
+
             $this->view->params['selectedTab'] = 'register';
             $this->view->render('default/register');
         }
