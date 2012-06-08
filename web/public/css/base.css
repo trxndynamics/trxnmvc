@@ -102,6 +102,9 @@ div.spacer {
 
 #content {
     background-color: #F7F7F7;
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
 }
 
 .contentWrapper {
@@ -259,17 +262,9 @@ div.success {
     border-radius: 25px 25px / 25px 25px;
 }
 
-#content {
-    margin-left: auto;
-    margin-right: auto;
-    width: 980px;
-    background-color: grey;
-}
-
 #footer {
     margin-left: auto;
     margin-right: auto;
     width: 980px;
-    background-color: green;
     text-align: center;
 }

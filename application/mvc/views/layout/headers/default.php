@@ -4,6 +4,7 @@
     <title><?php if(isset($this->customTitle)) echo $this->customTitle; else echo 'TrxnMVC'; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="<?php echo urlpath; ?>/public/css/base.css" />
+    <link href='http://fonts.googleapis.com/css?family=Quattrocento' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="<?php echo urlpath; ?>/public/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="<?php echo urlpath; ?>/public/js/jquery-ui-1.8.20.custom.min.js"></script>
 </head>

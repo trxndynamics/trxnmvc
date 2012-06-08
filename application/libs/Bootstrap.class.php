@@ -110,6 +110,22 @@ class Bootstrap
                 $this->storePageAccessData('Login', 'logout');
                 $handled = true;
                 break;
+            case 'about':
+            case 'About':
+                require_once(__DIR__.'/../mvc/controllers/DefaultController.class.php');
+                $this->storePageAccessData('Default', 'index');
+                $controller = new DefaultController();
+                $controller->aboutAction();
+                $handled = true;
+                break;
+            case 'subscribe':
+            case 'Subscribe':
+            require_once(__DIR__.'/../mvc/controllers/DefaultController.class.php');
+                $this->storePageAccessData('Default', 'register');
+                $controller = new DefaultController();
+                $controller->subscribeAction();
+                $handled = true;
+                break;
         }
 
         return $handled;

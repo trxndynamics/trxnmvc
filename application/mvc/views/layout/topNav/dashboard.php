@@ -1,5 +1,6 @@
 <?php
 if(isset($this->params['selectedTab'])){
+    var_dump($this->params['selectedTab']);
     $selected = $this->params['selectedTab'];
 } else $selected = 'dashboard';
 
