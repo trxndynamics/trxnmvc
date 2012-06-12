@@ -27,8 +27,12 @@ class Bootstrap
                 $collection->insert($insertData);
             }
         } catch(\MongoConnectionException $mce){
-            //service unavailable, redirect to index page
-            header('Location: index');
+            //service unavailable, redirect to service unavailable page
+            //require_once(__DIR__.'/../mvc/controllers/DefaultController.class.php');
+            //$controllerToRequest    = __NAMESPACE__.'\\'.'DefaultController';
+            //$controller             = new $controllerToRequest();
+            //$controller->serviceUnavailableAction();
+            return false;
         }
     }
 

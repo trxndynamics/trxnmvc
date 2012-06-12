@@ -27,8 +27,14 @@ class DefaultController extends BaseController
 
         if(isset($_POST['email'])){
             if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-
                 try {
+                    //subscribe to mailchimp api
+                    if(mailchimpEnabled === true){
+                        require_once(__DIR__.'/../../libs/thirdParty/mailchimp/MCAPI.class.php');
+                        $api    = new \MCAPI(mailchimpAPIKey);
+                        $mailChimpSuccess = $api->listSubscribe(mailchimpDefaultListId, $_POST['email'], '');
+                    }
+
                     $mongodb  = new \Mongo();
                     $db       = $mongodb->selectDB(mongoDBDatabaseName);
                     $collection = $db->selectCollection(mongoDBDatabaseName.'_subscribers');
@@ -44,6 +50,10 @@ class DefaultController extends BaseController
                     header('Location: index');
                 }
 
+                if(isset($mailChimpSuccess) && (is_bool($mailChimpSuccess))){
+                    $this->view->params['mailChimpSuccess'] = $mailChimpSuccess;
+                }
+
                 $this->view->params['success'] = true;
                 $this->view->render('default/subscribe');
                 Session::set('subscribedToMailingList',true);
@@ -56,5 +66,9 @@ class DefaultController extends BaseController
         } else {
             header('Location: '.urlpath);
         }
+    }
+
+    public function serviceUnavailableAction(){
+        $this->view->render('default/serviceUnavailable');
     }
 }

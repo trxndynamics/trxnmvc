@@ -1,13 +1,9 @@
 <div class="contentWrapper">
     <div id="leftBox">
         <div id="leftBoxContent">
-            <h2>Subscribe</h2>
+            <h2>Service Unavailable</h2>
             <div class="textBody">
-                You have been successfully added to the mailing list. <br />
-                <br />
-                <?php   if(isset($this->params['mailChimpSuccess']) && ($this->params['mailChimpSuccess']===true)){ ?>
-                A verification message has been sent to your email address, please click on the subscribe link in the email to confirm.
-                <?php   } ?>
+                This service is currently unavailable at the minute.
             </div>
         </div>
     </div>
