@@ -2,7 +2,7 @@
 
 namespace trxnMVC;
 
-class Session
+class TrxnSession
 {
     public static function init(){
         if(!isset($_SESSION))

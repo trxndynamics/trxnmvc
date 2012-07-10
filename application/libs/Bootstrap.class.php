@@ -7,7 +7,7 @@ class Bootstrap
     private function storePageAccessData($controllerName, $viewName=''){
         try {
             require_once(__DIR__.'/MongoDB.database.class.php');
-            $mongodb    = new \Mongo();
+            $mongodb  = new \MongoDBConnection();
             $db         = $mongodb->selectDB(mongoDBDatabaseName);
             $collection = $db->selectCollection(mongoDBDatabaseName . '_pageviews');
 
@@ -97,6 +97,7 @@ class Bootstrap
                 $controller->indexAction();
                 $handled = true;
                 break;
+            case 'register':
             case 'Register':
                 require_once(__DIR__.'/../mvc/controllers/LoginController.class.php');
                 $controllerToRequest    = __NAMESPACE__ . '\\' . 'LoginController';
@@ -117,7 +118,7 @@ class Bootstrap
             case 'about':
             case 'About':
                 require_once(__DIR__.'/../mvc/controllers/DefaultController.class.php');
-                $this->storePageAccessData('Default', 'index');
+                $this->storePageAccessData('Default', 'about');
                 $controller = new DefaultController();
                 $controller->aboutAction();
                 $handled = true;

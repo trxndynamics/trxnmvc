@@ -6,7 +6,8 @@ class LoginModel extends BaseModel
 {
     public function __construct(){
         try {
-            $this->mongodb  = new \Mongo();
+            require_once(__DIR__.'/../../libs/MongoDB.database.class.php');
+            $this->mongodb  = new \MongoDBConnection();
             $this->db       = $this->mongodb->selectDB(mongoDBDatabaseName);
         } catch(\MongoConnectionException $mce){
             //service unavailable, redirect to index page
@@ -15,10 +16,10 @@ class LoginModel extends BaseModel
     }
 
     private function setLoginSession($username){
-        Session::init();
-        Session::set('loggedIn', true);
-        Session::set('username', $username);
-        Session::set('lastIteraction', time());
+        TrxnSession::init();
+        TrxnSession::set('loggedIn', true);
+        TrxnSession::set('username', $username);
+        TrxnSession::set('lastIteraction', time());
     }
 
     public function register($username, $password){
@@ -65,6 +66,6 @@ class LoginModel extends BaseModel
     }
 
     public function logout(){
-        Session::destroy();
+        TrxnSession::destroy();
     }
 }

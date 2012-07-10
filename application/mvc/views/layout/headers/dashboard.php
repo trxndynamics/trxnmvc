@@ -1,6 +1,6 @@
 <?php
-    if(\trxnMVC\Session::get('loggedIn') == null){
-        \trxnMVC\Session::destroy();
+    if(\trxnMVC\TrxnSession::get('loggedIn') == null){
+        \trxnMVC\TrxnSession::destroy();
         header('Location: ../logout');
         exit();
     }

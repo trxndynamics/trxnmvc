@@ -37,4 +37,10 @@ const mailchimpDefaultListId    = '';                                 //your lis
 
 //for use in the display windows displaying twitter feed
 const twitterusername           = 'trxndynamics';
+
+/*
+ * MONGODB NAME
+ */
+
+const mongoDBDatabaseName       = 'trxn';
 ?>

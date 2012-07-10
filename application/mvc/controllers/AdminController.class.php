@@ -11,7 +11,7 @@ class AdminController extends BaseController
         parent::__construct();
         $this->view->customTitle = 'Administration';
 
-        if(Session::get('isWebsiteAdministrator') !== true){
+        if(TrxnSession::get('isWebsiteAdministrator') !== true){
             $this->authenticateAction();
             exit();
         }
@@ -22,7 +22,7 @@ class AdminController extends BaseController
             (isset($_POST['password'])) &&
             ($_POST['username']===$this->user) &&
             ($_POST['password']===$this->password)){
-            Session::set('isWebsiteAdministrator', true);
+            TrxnSession::set('isWebsiteAdministrator', true);
             header('Location: '.urlpath.'/admin/index');
         } else {
             $this->view->render('admin/authenticate', null);
@@ -34,7 +34,7 @@ class AdminController extends BaseController
     }
 
     public function signOutAction(){
-        Session::destroy();
+        TrxnSession::destroy();
         header('Location: '.urlpath.'/admin/index');
     }
 }

@@ -23,7 +23,7 @@ class DefaultController extends BaseController
     }
 
     public function subscribeAction(){
-        if(Session::get('subscribedToMailingList') === true)    header('Location: '.urlpath);
+        if(TrxnSession::get('subscribedToMailingList') === true)    header('Location: '.urlpath);
 
         if(isset($_POST['email'])){
             if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
@@ -35,7 +35,8 @@ class DefaultController extends BaseController
                         $mailChimpSuccess = $api->listSubscribe(mailchimpDefaultListId, $_POST['email'], '');
                     }
 
-                    $mongodb  = new \Mongo();
+                    require_once(__DIR__.'/../../libs/MongoDB.database.class.php');
+                    $mongodb  = new \MongoDBConnection();
                     $db       = $mongodb->selectDB(mongoDBDatabaseName);
                     $collection = $db->selectCollection(mongoDBDatabaseName.'_subscribers');
 
@@ -56,7 +57,7 @@ class DefaultController extends BaseController
 
                 $this->view->params['success'] = true;
                 $this->view->render('default/subscribe');
-                Session::set('subscribedToMailingList',true);
+                TrxnSession::set('subscribedToMailingList',true);
             } else {
                 $this->view->params['success'] = false;
                 $this->view->render('default/subscribe');

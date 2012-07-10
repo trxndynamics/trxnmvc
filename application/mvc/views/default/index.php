@@ -7,7 +7,11 @@
                 <br />
                 This website is running on TrxnMVC Framework.  When you download via GitHub you get this version or an improved version of the TrxnMVC Framework.<br />
                 <br />
-                See the about page for a list of features.
+                See the about page for a list of features.<br />
+                <br />
+                <br />
+                <br />
+                TrxnMVC is also good at being used for mobile web development (non-native), see the following webpage for example: <a href="<?php echo urlpath; ?>/mobile/index"><span> (sample mobile website)</span></a>
             </div>
         </div>
     </div>

@@ -2,11 +2,13 @@
 
 class MongoDBConnection extends Mongo
 {
+
     public function __construct(){
-        if((mongoDBUsername != '') || (mongoDBPassword != '')){
-            parent::__construct('mongodb://' . mongoDBUsername . ':' . mongoDBPassword . '@' . mongoDBHostname . ':' . mongoDBPort, array('connect'=>true));
+        if(isset($_SERVER['HTTP_HOST']) && ($_SERVER['HTTP_HOST']=='trxnmvc.localhost')){
+            parent::__construct('mongodb://localhost:27017', array('connect'=>true));
         } else {
-            parent::__construct('mongodb://' . mongoDBHostname . ':' . mongoDBPort, array('connect'=>true));
+            //parent::__construct('mongodb://mongousername:mongopassword@127.0.0.1:27017', array('connect'=>true));
+
         }
     }
 }

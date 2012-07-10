@@ -7,7 +7,7 @@ class TrackingController extends BaseController
     public function __construct(){
         parent::__construct();
 
-        if(Session::get('isWebsiteAdministrator') !== true)
+        if(TrxnSession::get('isWebsiteAdministrator') !== true)
             header('Location: '.urlpath.'');
 
         $this->view->customTitle = 'TrxnMVC Tracking';
@@ -19,8 +19,9 @@ class TrackingController extends BaseController
 
     public function pageViewsAction(){
         try {
-            $mongoDB    = new \Mongo();
-            $db         = $mongoDB->selectDB(mongoDBDatabaseName);
+            require_once(__DIR__.'/../../libs/MongoDB.database.class.php');
+            $mongodb  = new \MongoDBConnection();
+            $db         = $mongodb->selectDB(mongoDBDatabaseName);
             $collection = $db->selectCollection(mongoDBDatabaseName.'_pageviews');
 
             $pageViewData = array();

@@ -1,4 +1,3 @@
-<?php if(trxnMVC\Session::get('subscribedToMailingList') !== true){ ?>
 <div class="rightBox">
     <div class="rightBoxContent">
         <h3>Twitter</h3>
@@ -36,5 +35,3 @@
         </form>
     </div>
 </div>
-</div>
-<?php } ?>

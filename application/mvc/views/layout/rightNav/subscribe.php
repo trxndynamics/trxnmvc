@@ -1,4 +1,4 @@
-<?php if(trxnMVC\Session::get('subscribedToMailingList') !== true){ ?>
+<?php if(trxnMVC\TrxnSession::get('subscribedToMailingList') !== true){ ?>
 <div class="rightBox">
     <div class="rightBoxContent">
         <h3>Subscribe</h3>
