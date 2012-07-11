@@ -72,4 +72,8 @@ class DefaultController extends BaseController
     public function serviceUnavailableAction(){
         $this->view->render('default/serviceUnavailable');
     }
+
+    public function showcaseAction(){
+        $this->view->render('default/showcase', null);
+    }
 }
