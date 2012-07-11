@@ -60,7 +60,9 @@
             </div>
             <div class="textBody">
                 <br />
-                TrxnMVC is also good at being used for mobile web development (non-native), see the following webpage for example: <a href="<?php echo urlpath; ?>/mobile/index"><span> (sample mobile website)</span></a>
+                TrxnMVC is also good at being used for mobile web development (non-native), see the following webpage for example: <a href="<?php echo urlpath; ?>/mobile/index"><span> (sample mobile website)</span></a><br />
+                <br />
+                <a href="<?php echo urlpath; ?>/demo/showcase">See the TrxnMVC Showcase</a>
             </div>
         </div>
     </div>
